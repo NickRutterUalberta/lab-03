@@ -30,6 +30,7 @@ public class CityArrayAdapter extends ArrayAdapter<City> {
         City city = getItem(position);
         TextView cityName = view.findViewById(R.id.city_text);
         TextView provinceName = view.findViewById(R.id.province_text);
+        assert city != null;
         cityName.setText(city.getName());
         provinceName.setText(city.getProvince());
         return view;

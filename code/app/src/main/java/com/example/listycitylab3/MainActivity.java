@@ -18,7 +18,14 @@ public class MainActivity extends AppCompatActivity implements
     private CityArrayAdapter cityAdapter;
     @Override
     public void addCity(City city) {
+        if (city == null){
+            cityAdapter.notifyDataSetChanged();
+            return;
+        }
         cityAdapter.add(city);
+        cityAdapter.notifyDataSetChanged();
+    }
+    public void up(){
         cityAdapter.notifyDataSetChanged();
     }
     @Override
@@ -37,6 +44,13 @@ public class MainActivity extends AppCompatActivity implements
         FloatingActionButton fab = findViewById(R.id.button_add_city);
         fab.setOnClickListener(v -> {
             new AddCityFragment().show(getSupportFragmentManager(), "Add City");
+        });
+
+        cityList.setOnItemClickListener((parent,view,position,id) -> {
+            City editCity = dataList.get(position);
+            cityAdapter.notifyDataSetChanged();
+            new AddCityFragment(editCity).show(getSupportFragmentManager(), "Edit City");
+            up();
         });
     }
 }
